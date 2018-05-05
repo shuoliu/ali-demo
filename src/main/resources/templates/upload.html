@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Photo Upload Demo</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+<div class="centered" id="image-upload">
+  <div>
+    <h2>Upload Photo</h2>
+    <form id="upload" action="" method="post">
+      <div id="image-preview">
+        <img />
+      </div>
+      <input type="file" name="file" id="file" accept="image/*" style="width:378px" required="required" />
+      <input type="submit" id="submit" value="Upload (max 8MB)" style="width:200px;margin-top:6px;" />
+    </form>
+  </div>
+  <div style="margin-top:20px;"><a href="/gallery">See Uploaded --></a></div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/upload_photo.js"></script>
+</body>
+</html>

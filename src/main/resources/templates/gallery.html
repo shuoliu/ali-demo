@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Photo Gallery</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+<h2>All Photos:</h2>
+<div id="photos">
+  <span th:each="photo : ${photos}" class="photo-block">
+    <div th:id="${photo.getId()}" class="photo-tile">
+      <div class="photo">
+        <img th:src="${photo.getOssPath()}" />
+      </div>
+      <label th:text="${photo.getName()}" ></label>
+    </div>
+  </span>
+</div>
+<div style="margin-top:20px;"><a href="/upload">Back to Upload</a></div>
+</body>
+</html>

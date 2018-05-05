@@ -1,0 +1,75 @@
+buildscript {
+  repositories {
+    maven {
+      url 'https://plugins.gradle.org/m2/'
+    }
+  }
+  dependencies {
+    classpath 'nu.studer:gradle-jooq-plugin:2.0.9'
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: "org.springframework.boot"
+apply plugin: 'nu.studer.jooq'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  dbUrl = System.getProperty("spring.datasource.url", "jdbc:postgresql://localhost:5432/demo")
+  dbUser = System.getProperty("spring.datasource.username", "postgres")
+  dbPassword = System.getProperty("spring.datasource.password", "")
+}
+
+dependencies {
+  compile "com.fasterxml.jackson.core:jackson-databind:2.8.10"
+  compile "org.springframework.boot:spring-boot-starter-jooq:1.5.3.RELEASE"
+  compile "org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE"
+  compile "org.springframework.boot:spring-boot-starter-thymeleaf:1.5.3.RELEASE"
+  compile "com.aliyun.oss:aliyun-sdk-oss:2.8.2"
+  compile "org.postgresql:postgresql:42.0.0"
+  jooqRuntime "org.postgresql:postgresql:42.0.0"
+}
+
+
+jooq {
+  version = '3.9.1'
+  edition = 'OSS'
+  photos(sourceSets.main) {
+    jdbc {
+      driver = "org.postgresql.Driver"
+      url = dbUrl
+      user = dbUser
+      password = dbPassword
+      schema = "public"
+    }
+    generator {
+      name = 'org.jooq.util.DefaultGenerator'
+      strategy {
+        name = 'org.jooq.util.DefaultGeneratorStrategy'
+      }
+
+      database {
+        name = 'org.jooq.util.postgres.PostgresDatabase'
+        inputSchema = 'public'
+        includes = '.*'
+
+      }
+      generate {
+        relations = true
+        records = true
+        javaTimeTypes = true
+      }
+      target {
+        packageName = "shuo.photos.orm"
+        directory = "src/generated/java"
+      }
+    }
+  }
+}
