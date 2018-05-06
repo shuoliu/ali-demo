@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>handbook</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+<div class="stackedit__html"><h2 id="aliyun-web-app-demo-operation-handbook">Aliyun Web App Demo Operation Handbook</h2>
+  <h3 id="about-this-demo">About this Demo</h3>
+  <p>This is a simple demo of showing how easily developers can integrate web application with Aliyun OSS. In this demo, user will be able to upload photos to OSS through webpage, and see all the photos that uploaded on OSS in browser.</p>
+  <h3 id="system-overview">System Overview</h3>
+  <p>Running this demo involves setting up three different Aliyun services: <code>ECS</code>, <code>RDS</code> and <code>OSS</code>. See the diagram below.</p>
+  <div class="mermaid"><svg xmlns="http://www.w3.org/2000/svg" id="mermaid-svg-sxzg6M4QjGHrmszp" height="100%" viewBox="0 0 723.34375 227" style="max-width:723.34375px;"><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath" style="opacity: 1;"><path class="path" d="M98.328125,73.15770020533881L173.3046875,39L248.28125,63.398253564717585" marker-end="url(#arrowhead6190)" style="fill:none"></path><defs><marker id="arrowhead6190" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M98.328125,88.94127310061602L173.3046875,85L248.28125,85" marker-end="url(#arrowhead6191)" style="fill:none"></path><defs><marker id="arrowhead6191" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M98.328125,105.41108829568789L173.3046875,133L248.28125,107.54095280203383" marker-end="url(#arrowhead6192)" style="fill:none"></path><defs><marker id="arrowhead6192" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M94.1671875,114L173.3046875,166L314.6640625,166L461.8125,166L587.875,164.33193776812942" marker-end="url(#arrowhead6193)" style="fill:none"></path><defs><marker id="arrowhead6193" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M381.046875,66.05261481284842L461.8125,43L542.578125,43" marker-end="url(#arrowhead6194)" style="fill:none"></path><defs><marker id="arrowhead6194" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M381.046875,98.08271834350943L461.8125,114L587.875,155.70155579676435" marker-end="url(#arrowhead6195)" style="fill:none"></path><defs><marker id="arrowhead6195" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(173.3046875,39)" style="opacity: 1;"><g transform="translate(-49.9765625,-13)" class="label"><foreignObject width="99.953125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">POST /photos</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(173.3046875,85)" style="opacity: 1;"><g transform="translate(-44.4765625,-13)" class="label"><foreignObject width="88.953125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">GET /upload</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(173.3046875,133)" style="opacity: 1;"><g transform="translate(-43.6953125,-13)" class="label"><foreignObject width="87.390625" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">GET /gallery</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(314.6640625,166)" style="opacity: 1;"><g transform="translate(-37.7265625,-13)" class="label"><foreignObject width="75.453125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">load image</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(461.8125,43)" style="opacity: 1;"><g transform="translate(-55.765625,-13)" class="label"><foreignObject width="111.53125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">photo metadata</span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(461.8125,114)" style="opacity: 1;"><g transform="translate(-35.7421875,-13)" class="label"><foreignObject width="71.484375" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span class="edgeLabel">PutObject</span></div></foreignObject></g></g></g><g class="nodes"><g class="node" id="A" transform="translate(59.1640625,91)" style="opacity: 1;"><rect rx="5" ry="5" x="-39.1640625" y="-23" width="78.328125" height="46"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-29.1640625,-13)"><foreignObject width="58.328125" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Browser</div></foreignObject></g></g></g><g class="node" id="B" transform="translate(314.6640625,85)" style="opacity: 1;"><rect rx="5" ry="5" x="-66.3828125" y="-23" width="132.765625" height="46"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-56.3828125,-13)"><foreignObject width="112.765625" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">ECS/App Server</div></foreignObject></g></g></g><g class="node" id="C" transform="translate(612.9609375,43)" style="opacity: 1;"><rect rx="5" ry="5" x="-70.3828125" y="-23" width="140.765625" height="46"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-60.3828125,-13)"><foreignObject width="120.765625" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">RDS/PostgreSQL</div></foreignObject></g></g></g><g class="node" id="D" transform="translate(612.9609375,164)" style="opacity: 1;"><rect rx="5" ry="5" x="-25.0859375" y="-23" width="50.171875" height="46"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-15.0859375,-13)"><foreignObject width="30.171875" height="26"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">OSS</div></foreignObject></g></g></g></g></g></g></svg></div>
+  <p>First of all, an ECS instance is required to run the web application. It serves two webpages for upload and display photos respectively. It also accepts post requests from client to store photo onto OSS by using <code>putObject</code> method.</p>
+  <p>Second, an OSS bucket needs to be created in order to store user uploaded photos. It will also expose a public address which browser can directly use as the image source.</p>
+  <p>Last but not least, an RDS instance is needed to store photo metadata, including photo id and the image url that points to OSS bucket.</p>
+  <h3 id="deployment-instruction">Deployment Instruction</h3>
+  <p>Following below steps to set up the demo. For simplicity, all services will be created under the same account and same region. Create VPC or enable public access if needed for cross account/region access.</p>
+  <h4 id="ecs">ECS</h4>
+  <ol>
+    <li>On Aliyun console, select <em>Elastic Compute Service</em> from <em>Products</em> list. On the opened panel click <em>Instances</em>.</li>
+    <li>Click <em>Create Instance</em> on the up right corner to start the guided instance creation flow.</li>
+    <li>A few important options:
+      <ul>
+        <li>Image: select CentOS.</li>
+        <li>Network: select VPC, create a new one if necessary.</li>
+        <li>Network Billing Method: check <em>Assign public IP</em>. If skip this step, you can set up <em>Elastic IP</em> later.</li>
+        <li>Security Group: configure or create new security group with port 80 and 22 open.</li>
+        <li>Log on Credentials: create a key pair (recommended) or set up password.</li>
+      </ul>
+    </li>
+    <li>After creation, find the assigned public address in ECS instances console, make sure you can ssh to it.</li>
+  </ol>
+  <h4 id="rds">RDS</h4>
+  <ol>
+    <li>On Aliyun console, select <em>RDS</em> from <em>Products</em> list. On the <em>Instances</em> panel click <em>Create Instance</em> to start the guided instance creation flow.</li>
+    <li>A few important options:
+      <ul>
+        <li>DB Engine: select PostgreSQL.</li>
+        <li>Network Type: select the same VPC as the one for ECS instance.</li>
+      </ul>
+    </li>
+    <li>Upon creation, navigate back to the <em>Instances</em> panel, select the newly created instance.</li>
+    <li>Click <em>Accounts</em> on the left panel, create a database account.</li>
+    <li>Click <em>Security</em> on the left panel, open the default group, remove 127.0.0.1, and select the ECS intranet IP which belongs to the ECS instance that created earlier.</li>
+    <li>Click <em>Connection Options</em> on the left panel, click <em>Modify Connection Address</em>, on the pop-up window, change the port to <code>5432</code>.</li>
+    <li>Note down the intranet address for later set up.</li>
+  </ol>
+  <h4 id="oss">OSS</h4>
+  <ol>
+    <li>On Aliyun console, select <em>RDS</em> from <em>Products</em> list. Click <code>+</code> on the left panel to create a bucket.</li>
+    <li>In the <em>ACL</em> section, select <em>Public Read</em>.</li>
+    <li>Note down <code>Endpoint</code> for both Internet access and intranet access.</li>
+  </ol>
+  <h4 id="ram">RAM</h4>
+  <p>To programmatically read/write to OSS, we need to create a user with correct policy, and create an access key for our application, to access OSS on behalf of us.</p>
+  <ol>
+    <li>On Aliyun console, select <em>Resource Access Management</em>. In <em>Users</em> panel, click <em>Create User</em>.</li>
+    <li>On the <em>User Details</em> panel, click <em>Create Access Key</em>. Remember to save the access key information on the pop-up window, before close it. Keep the access key in safe place.</li>
+    <li>On the <em>User Authorization Policies</em> panel, edit Authorization Policy and add <code>AliyunOSSFullAccess</code>.</li>
+  </ol>
+  <h4 id="set-up-environment-on-ecs-instance">Set up Environment on ECS instance</h4>
+  <p><em><strong>Install Software</strong></em><br>
+    Log onto the ECS instance using assigned public IP, run the following commands to install JDK8 and psql client:</p>
+  <ul>
+    <li><code>yum install java-1.8.0-openjdk</code></li>
+    <li><code>yum install postgresql</code></li>
+  </ul>
+  <p><em><strong>Create DB Table</strong></em><br>
+    Use psql to connect to database using the following command:<br>
+    - <code>psql -h &lt;RDS intranet address&gt; -d postgres -U &lt;RDS username&gt;</code><br>
+    Run the following SQL query to create photo metadata table:</p>
+  <pre><code>create table photos (
+    id varchar primary key,
+    uploaded_time timestamp,
+    name text,
+    oss_path varchar
+);
+</code></pre>
+  <p><em><strong>Upload Application JAR</strong></em><br>
+    The demo application is developed and built using Spring Boot, and can be run as a jar program without container. Obtain the application jar (demo.jar), upload to ECS instance using <code>scp</code>:<br>
+    - <code>scp &lt;jar location&gt;/demo.jar root@&lt;ECS public IP&gt;:~/</code></p>
+  <h4 id="start-demo-application">Start Demo Application</h4>
+  <p>In bash command line set JVM options: <code>JAVA_OPTS="-D&lt;key1&gt;=&lt;value1&gt; -D&lt;key2&gt;=..."</code><br>
+    These options are required for the demo to run:</p>
+  <blockquote>
+    <p>-Dspring.datasource.url=jdbc:postgresql://&lt;RDS intranet address&gt;:5432/postgres<br>
+      -Dspring.datasource.username=… #RDS username<br>
+      -Dspring.datasource.password=… #RDS user password<br>
+      -Daliyun.oss.endpoint.read=… #OSS public endpoint<br>
+      -Daliyun.oss.endpoint.write=… #OSS intranet endpoint<br>
+      -Daliyun.oss.bucket=… #OSS bucket name<br>
+      -Daliyun.access.key.id=… #RAM access key ID<br>
+      -Daliyun.access.key.secret=… #RAM access key secret</p>
+  </blockquote>
+  <p>Start the app server in daemon:<br>
+    <code>nohup java $JAVA_OPTS -jar demo.jar &gt; server.log 2&gt;&amp;1 &amp;</code></p>
+  <h3 id="verify-deployment">Verify Deployment</h3>
+  <p>Open browser, navigate to the public IP address of ECS. It should redirect to <code>/upload</code> page. Select a photo with size less than 8 MB, click upload. If an alert pops up saying “success”, click <em>See Uploaded</em> link. On the next page, the uploaded photo should show up. If any operation failed in the middle, go to ECS instance and check <code>server.log</code> to debug.</p>
+</div>
+</body>
+
+</html>

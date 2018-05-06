@@ -11,7 +11,7 @@ public class OssService {
   private String writeEndpoint = System.getProperty("aliyun.oss.endpoint.write", readEndpoint);
 
   private String bucket = System.getProperty("aliyun.oss.bucket");
-  private String keyPrefix = System.getProperty("aliyun.oss.key-prefix");
+  private String keyPrefix = System.getProperty("aliyun.oss.key-prefix", "");
 
   private String publicHost = "https://" + bucket + "." + readEndpoint + "/";
 
